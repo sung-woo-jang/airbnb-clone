@@ -1,0 +1,9 @@
+{
+  "python.pythonPath": "C:\\Users\\장성우\\.virtualenvs\\airbnb-clone-iOs0IKRX\\Scripts\\python.exe",
+  "python.linting.flake8Enabled": true,
+  "python.linting.pylintEnabled": false,
+  //   "python.linting.enabled": true,
+  "editor.formatOnSave": true,
+  "python.formatting.provider": "black",
+  "python.linting.flake8Args": ["--max-line-length=88"]
+}
