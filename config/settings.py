@@ -36,16 +36,7 @@ DJANGO_APPS = [
     "django.contrib.staticfiles",
 ]
 
-THIRD_PARTY_APPS = ["django_countries"]
-
-PROJECT_APPS = [
-    "core.apps.CoreConfig",
-    "users.apps.UsersConfig",
-    "rooms.apps.RoomsConfig",
-    "reservations.apps.ReservationsConfig",
-    "lists.apps.ListsConfig",
-    "conversations.apps.ConversationsConfig",
-]
+PROJECT_APPS = ["users.apps.UsersConfig"]
 
 INSTALLED_APPS = DJANGO_APPS + PROJECT_APPS
 
@@ -123,4 +114,4 @@ USE_TZ = True
 
 STATIC_URL = "/static/"
 
-AUTH_USER_MODEL = "users.User"
+AUTH_USER_MODEL = "users.User"  # 이거슨 user_model을 쉽게 확장하는 방법
