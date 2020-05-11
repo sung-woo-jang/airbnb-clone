@@ -1,4 +1,4 @@
-from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import AbstractUser  # = 추상(데이터베이스에 등록 안된대)
 from django.db import models
 
 
