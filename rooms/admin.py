@@ -19,10 +19,18 @@ class ItemAdmin(admin.ModelAdmin):
     pass
 
 
+# admin.StackedInline도 있음(이건 필드를 세로로 보여줌)
+class PhotoInline(admin.TabularInline):
+
+    model = models.Photo
+
+
 @admin.register(models.Room)
 class RoomAdmin(admin.ModelAdmin):
 
     """ Room Admin Definition """
+
+    inlines = (PhotoInline,)
 
     fieldsets = (
         (
@@ -70,6 +78,8 @@ class RoomAdmin(admin.ModelAdmin):
         "city",
         "country",
     )
+
+    raw_id_fields = ("host",)
 
     search_fields = (
         "=city",
