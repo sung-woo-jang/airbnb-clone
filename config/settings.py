@@ -125,3 +125,8 @@ USE_TZ = True
 STATIC_URL = "/static/"
 
 AUTH_USER_MODEL = "users.User"  # 이거슨 user_model을 쉽게 확장하는 방법
+
+# MEDIA_ROOT = 우리가 업로드한 파일들을 어디에 써야할지 알려줌
+MEDIA_ROOT = os.path.join(BASE_DIR, "uploads")
+
+MEDIA_URL = "/media/"

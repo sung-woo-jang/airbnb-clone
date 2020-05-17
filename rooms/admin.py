@@ -1,4 +1,5 @@
 from django.contrib import admin
+from django.utils.html import mark_safe
 from . import models
 
 
@@ -13,8 +14,9 @@ class ItemAdmin(admin.ModelAdmin):
     )
 
     def used_by(self, obj):
-        print(obj.rooms.count())
         return obj.rooms.count()
+
+    pass
 
 
 @admin.register(models.Room)
@@ -84,10 +86,10 @@ class RoomAdmin(admin.ModelAdmin):
         return obj.amenities.count()
         # obj == 객실 (기억(?)해두기)
 
-        """
-        어드민 클래스 안의 함수는 self(admin class=RoomAdmin)를 받고
-        그리고 object를 받음(현재 object = row)
-        """
+    """
+    어드민 클래스 안의 함수는 self(admin class=RoomAdmin)를 받고
+    그리고 object를 받음(현재 object = row)
+    """
 
     def count_photos(self, obj):
         return obj.photos.count()
@@ -96,6 +98,14 @@ class RoomAdmin(admin.ModelAdmin):
 @admin.register(models.Photo)
 class PhotoAdmon(admin.ModelAdmin):
 
-    """ """
+    """ Photo Admin Definition """
 
-    pass
+    list_display = (
+        "__str__",
+        "get_thumbnail",
+    )
+
+    def get_thumbnail(self, obj):
+        return mark_safe(f'<img width="50px" src="{obj.file.url}" />')
+
+    get_thumbnail.short_description = "Thumbnail"

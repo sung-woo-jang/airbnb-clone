@@ -2,8 +2,6 @@ from django.db import models
 from django_countries.fields import CountryField
 from core import models as core_models
 
-# Create your models here.
-
 
 class AbstractItem(core_models.TimeStampedModel):
 
@@ -24,7 +22,6 @@ class RoomType(AbstractItem):
 
     class Meta:
         verbose_name = "Room Type"
-        ordering = ["created"]
 
 
 class Amenity(AbstractItem):
@@ -38,6 +35,8 @@ class Amenity(AbstractItem):
 class Facility(AbstractItem):
 
     """ Facility Model Definition """
+
+    pass
 
     class Meta:
         verbose_name_plural = "Facilities"
@@ -56,7 +55,7 @@ class Photo(core_models.TimeStampedModel):
     """ Photo Model Definition """
 
     caption = models.CharField(max_length=80)
-    file = models.ImageField()
+    file = models.ImageField(upload_to="room_photos")
     room = models.ForeignKey("Room", related_name="photos", on_delete=models.CASCADE)
 
     def __str__(self):

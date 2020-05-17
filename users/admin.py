@@ -39,14 +39,3 @@ class CustomUserAdmin(UserAdmin):
         "is_staff",
         "is_superuser",
     )
-
-
-"""     같은거임
-admin 패널에서 이 User를 보고싶다
-user를 컨트롤한 클래스가 바로 이거야
-
-class CustomUserAdmin(admin.ModelAdmin):
-    pass
-
-admin.site.register(models.User, CustomUserAdmin) 
-"""
