@@ -96,6 +96,8 @@ class RoomAdmin(admin.ModelAdmin):
         return obj.amenities.count()
         # obj == 객실 (기억(?)해두기)
 
+    count_amenities.short_description = "Amenity Count"
+
     """
     어드민 클래스 안의 함수는 self(admin class=RoomAdmin)를 받고
     그리고 object를 받음(현재 object = row)
@@ -103,6 +105,8 @@ class RoomAdmin(admin.ModelAdmin):
 
     def count_photos(self, obj):
         return obj.photos.count()
+
+    count_photos.short_description = "Photo Count"
 
 
 @admin.register(models.Photo)

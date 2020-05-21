@@ -25,11 +25,12 @@ class Command(BaseCommand):
             room_models.Room,
             number,
             {
+                # https://faker.readthedocs.io/en/master/providers/faker.providers.address.html
                 "name": lambda x: seeder.faker.address(),
                 "host": lambda x: random.choice(all_users),
                 "room_type": lambda x: random.choice(room_types),
-                "guests": lambda x: random.randint(1, 300),
-                "price": lambda x: random.randint(1, 300),
+                "guests": lambda x: random.randint(1, 10),
+                "price": lambda x: random.randint(1000, 30000),
                 "beds": lambda x: random.randint(1, 5),
                 "bedrooms": lambda x: random.randint(1, 5),
                 "baths": lambda x: random.randint(1, 5),
@@ -37,6 +38,29 @@ class Command(BaseCommand):
         )
         created_photos = seeder.execute()
         created_clean = flatten(list(created_photos.values()))
+        amenities = room_models.Amenity.objects.all()
+        facilities = room_models.Facility.objects.all()
+        rules = room_models.HouseRule.objects.all()
         for pk in created_clean:
-            photo = room_models.Room.objects.get(pk=pk)
+            room = room_models.Room.objects.get(pk=pk)
+            # 뽀링키 가짜 데이터 생성 방법
+            for i in range(3, random.randint(10, 30)):
+                room_models.Photo.objects.create(
+                    caption=seeder.faker.sentence(),
+                    room=room,
+                    file=f"room_photos/{random.randint(1,31)}.webp",
+                )
+            # 이 밑은 ManyToMany 관계에서 가짜 데이터 생성 시 쓰는 법
+            for a in amenities:
+                magic_number = random.randint(0, 15)
+                if magic_number % 2 == 0:
+                    room.amenities.add(a)
+            for f in facilities:
+                magic_number = random.randint(0, 15)
+                if magic_number % 2 == 0:
+                    room.facilities.add(f)
+            for r in rules:
+                magic_number = random.randint(0, 15)
+                if magic_number % 2 == 0:
+                    room.house_rules.add(r)
         self.stdout.write(self.style.SUCCESS(f"{number} rooms created!"))
